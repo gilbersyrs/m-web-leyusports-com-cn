@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>雷速 · 站点说明</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f7f3ed; /* 米白基调 */
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans SC", "Helvetica Neue", sans-serif;
+      color: #2b2b2b;
+      line-height: 1.7;
+      padding: 2rem 1rem 3rem;
+    }
+
+    .page {
+      max-width: 840px;
+      margin: 0 auto;
+      background: #fefcf9;
+      padding: 2.8rem 2.2rem;
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+
+    /* 标题层次 */
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #282828;
+      margin-bottom: 0.3rem;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-top: 2.2rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #8f7e6a;
+      padding-left: 0.9rem;
+      color: #322f2b;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-top: 1.4rem;
+      margin-bottom: 0.5rem;
+      color: #3e3a34;
+    }
+
+    p {
+      margin-bottom: 1.2rem;
+    }
+
+    /* 引用块 / 提示框 —— 本次设计为浅卡其底、左竖线 */
+    .insight {
+      background: #f2ede5;
+      border-left: 5px solid #b3a08b;
+      padding: 1.2rem 1.5rem;
+      margin: 1.8rem 0;
+      border-radius: 0 12px 12px 0;
+      color: #3a352f;
+      font-size: 0.97rem;
+    }
+
+    .insight strong {
+      color: #1f1c18;
+      font-weight: 600;
+    }
+
+    .insight a {
+      color: #3e5a5c;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .insight a:hover {
+      color: #1f3739;
+    }
+
+    /* 卡片网格 —— 用于亮点场景 */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin: 1.6rem 0 0.8rem;
+    }
+
+    .feature-card {
+      background: #f9f6f0;
+      padding: 1.4rem 1.2rem;
+      border-radius: 16px;
+      border: 1px solid #e7dfd4;
+      transition: box-shadow 0.2s;
+    }
+
+    .feature-card:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .feature-card h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: #2e2a24;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+      color: #4b4640;
+    }
+
+    /* 使用建议列表 */
+    .suggest-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.2rem 0;
+    }
+
+    .suggest-list li {
+      padding: 0.5rem 0 0.5rem 1.6rem;
+      position: relative;
+      border-bottom: 1px dashed #e3dbd0;
+    }
+
+    .suggest-list li:last-child {
+      border-bottom: none;
+    }
+
+    .suggest-list li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #8f7e6a;
+      font-weight: 500;
+    }
+
+    /* FAQ 摘要 */
+    .faq-item {
+      margin: 1rem 0;
+      padding: 0.8rem 1rem;
+      background: #fcf9f5;
+      border-radius: 12px;
+    }
+
+    .faq-item dt {
+      font-weight: 550;
+      color: #38342e;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-item dd {
+      color: #4a453e;
+      font-size: 0.95rem;
+      margin-left: 0;
+    }
+
+    /* 链接 */
+    a {
+      color: #3b5b5c;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color 0.15s;
+    }
+
+    a:hover {
+      color: #1c3a3b;
+    }
+
+    /* 按钮 —— 克制风格，仅装饰作用 */
+    .read-more {
+      display: inline-block;
+      padding: 0.45rem 1rem;
+      background: transparent;
+      border: 1px solid #b3a08b;
+      border-radius: 40px;
+      color: #4f4940;
+      font-size: 0.85rem;
+      text-decoration: none;
+      margin-top: 0.2rem;
+      transition: background 0.2s;
+    }
+
+    .read-more:hover {
+      background: #ede5da;
+      color: #24211c;
+    }
+
+    /* 小字说明 */
+    .note {
+      font-size: 0.88rem;
+      color: #7b7267;
+      margin-top: 2.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid #e5ddd2;
+    }
+
+    /* 响应式 */
+    @media (max-width: 640px) {
+      .page {
+        padding: 1.6rem 1.2rem;
+        border-radius: 18px;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 0.9rem;
+      }
+
+      .feature-card {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>雷速 · 站点定位与说明</h1>
+    <p style="color: #5f5548; margin-bottom: 1.8rem; font-size: 0.95rem;">
+      一份关于 <a href="https://iqiyi-leisu.com" style="font-weight: 500;">雷速</a> 的简介、特点与使用指引。
+    </p>
+
+    <!-- 摘要区域 -->
+    <section>
+      <p>
+        <strong>雷速</strong> 是一个面向特定用户群的信息聚合与工具型网站，提供经过筛选的实用内容与导航服务。站点力求以简洁、直接的界面承载多元信息，同时保持较低的认知负荷，让访问者可以快速定位所需条目，而非在冗余设计里迷失。平台不追求流量裂变或用户驻留时长，更关注每次访问的完成效率。
+      </p>
+      <div class="insight">
+        <strong>可信说明：</strong> 本页面仅为介绍用途，所有关于 <a href="https://iqiyi-leisu.com">雷速</a> 的描述均基于站点公开呈现的内容与功能逻辑。网站未接入第三方追踪脚本，未使用欺骗性跳转，内容更新遵循例行周期。如需了解最新状态，建议直接通过上方链接进入站点浏览。
+      </div>
+    </section>
+
+    <!-- 核心特点 -->
+    <h2>特点一览</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h4>低噪界面</h4>
+        <p>减少装饰性元素，信息层级清晰，文本为主，辅以必要视觉引导，适配长时间浏览场景。</p>
+      </div>
+      <div class="feature-card">
+        <h4>分类索引</h4>
+        <p>按使用场景对内容做轻量级归类，避免信息堆砌，让访问者依据当前意图快速筛选。</p>
+      </div>
+      <div class="feature-card">
+        <h4>稳定承载</h4>
+        <p>采用静态化部署方案，页面结构轻量化，无需反复请求动态接口，响应速度有基本保障。</p>
+      </div>
+      <div class="feature-card">
+        <h4>定期迭代</h4>
+        <p>站点内容依照实用性与时效性做渐进调整，不堆积过期或无效链接，保持基础可用度。</p>
+      </div>
+    </div>
+
+    <!-- 使用建议 -->
+    <h2>使用建议</h2>
+    <ul class="suggest-list">
+      <li>如你需要查阅特定类目的信息，可直接利用站内索引或关键词定位，减少无关干扰。</li>
+      <li>推荐使用桌面端浏览器访问，分辨率 1280px 以上可获得更完整的排版视野；移动端同样适配。</li>
+      <li>若站点内容无法满足你的具体需求，可尝试通过页面提供的联系方式反馈，运营团队会评估纳入后续更新。</li>
+      <li>请勿对站点进行自动化高频请求或恶意扫描，静态资源虽未做严格限制，但持续高频访问可能触发临时保护。</li>
+      <li>对于外部链接跳转后的页面，请自行判断其内容可靠度，<a href="https://iqiyi-leisu.com">雷速</a> 仅提供初步筛选，不承担第三方信息责任。</li>
+    </ul>
+
+    <!-- 场景摘要 + 提示框 -->
+    <h2>适用场景</h2>
+    <p>
+      日常信息查阅、工具检索、特定资源定位。站点既适合快速浏览式访问——在较短时间内获取概要内容；也适合需要反复回查的轻度研究场景。设计上未采用无限滚动或强推荐逻辑，因此也适合需要保持注意力的用户。对于非核心需求之外的浏览，建议合理控制单次使用时长。
+    </p>
+
+    <div class="insight">
+      <strong>场景提醒：</strong> 若你属于首次访问，可以先花一两分钟浏览首页整体结构，了解分类逻辑后再深入具体页面，效率往往更高。站点不设强制注册或登录，绝大多数内容可免验证查阅。
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <h2>FAQ 摘要</h2>
+    <dl class="faq-item">
+      <dt>Q: 雷速 是否需要注册或付费？</dt>
+      <dd>目前网站所有公开内容均免费，且无强制注册环节。部分交互功能若后续扩展，会以醒目方式告知用户。</dd>
+    </dl>
+    <dl class="faq-item">
+      <dt>Q: 站点内容多久更新一次？</dt>
+      <dd>暂未设定固定周期，但会基于实用性与用户反馈做不定时维护。过时或失效条目会在发现后尽快清理或替换。</dd>
+    </dl>
+    <dl class="faq-item">
+      <dt>Q: 能否将 雷速 的内容用于商业用途？</dt>
+      <dd>站点原创摘要与结构设计保留相关权利；引用或转载其中公开信息请遵循合理使用原则，并注明原始出处。</dd>
+    </dl>
+
+    <!-- 尾部说明 -->
+    <div class="note">
+      <p>
+        <span style="font-size: 0.92rem;">页面版本 · 站点介绍  &nbsp;|&nbsp;  </span>
+        <span class="read-more" style="cursor: default;">信息截止 2025</span>
+      </p>
+      <p style="margin-top: 0.6rem; font-size: 0.85rem; color: #8b8073;">
+        本站内容仅供参考，不构成任何形式的使用承诺。具体功能与内容以 <a href="https://iqiyi-leisu.com">雷速</a> 实际页面为准。
+      </p>
+    </div>
+  </div>
+</body>
+</html>
