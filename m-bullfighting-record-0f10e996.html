@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斗牛游戏 · 知识库入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+            background: #f6f4f0;
+            color: #26231f;
+            line-height: 1.65;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: #1e1b18;
+            color: #ede9e0;
+            padding: 4rem 1.5rem 3.5rem;
+            text-align: center;
+            border-bottom: 1px solid #3a352f;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #c9a45c, #b68b4a, #c9a45c);
+            opacity: 0.6;
+        }
+
+        .hero h1 {
+            font-weight: 500;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero .sub {
+            font-size: 1rem;
+            color: #b7ad9e;
+            max-width: 580px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            margin-top: 1.4rem;
+            padding: 0.25rem 1rem;
+            border: 1px solid #7b6e5b;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #cfc2ae;
+            letter-spacing: 1px;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 4rem;
+        }
+
+        /* 目录感布局：网格卡片 */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.8rem 1.6rem 1.6rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e6e0d6;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 18px rgba(60, 45, 30, 0.08);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+            color: #2e2a24;
+            border-left: 3px solid #c9a45c;
+            padding-left: 0.75rem;
+        }
+
+        .card p {
+            font-size: 0.92rem;
+            color: #4f4940;
+            margin-top: 0.3rem;
+        }
+
+        .card .meta {
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 0.78rem;
+            color: #8e8476;
+            background: #f2eee8;
+            padding: 0.2rem 0.7rem;
+            border-radius: 12px;
+        }
+
+        /* 说明区 + 提示区并排 */
+        .split-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2.8rem;
+            align-items: stretch;
+        }
+
+        .panel-item {
+            flex: 1 1 240px;
+            background: #fffcf8;
+            padding: 1.6rem 1.8rem;
+            border-radius: 18px;
+            border: 1px solid #e0d9ce;
+        }
+
+        .panel-item h4 {
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #3e3931;
+        }
+
+        .panel-item p {
+            font-size: 0.9rem;
+            color: #4e483e;
+        }
+
+        .panel-item .icon-tag {
+            font-size: 0.75rem;
+            background: #dad3c7;
+            color: #2e2a24;
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 0.6rem;
+        }
+
+        /* 相关信息区 —— 紧凑列表 */
+        .related-box {
+            background: #f0ece4;
+            border-radius: 20px;
+            padding: 1.8rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .related-box .info-cluster {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 2rem;
+        }
+
+        .related-box .info-cluster span {
+            font-size: 0.88rem;
+            color: #3b362e;
+            background: #ffffffb3;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            border: 1px solid #d5cdbe;
+        }
+
+        .related-box .info-cluster span strong {
+            font-weight: 500;
+            color: #7a643c;
+        }
+
+        .related-box .label {
+            font-size: 0.8rem;
+            color: #756b5b;
+            letter-spacing: 1px;
+        }
+
+        .inline-link {
+            color: #a17f48;
+            text-decoration: none;
+            font-weight: 400;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        .inline-link:hover {
+            border-bottom-color: #a17f48;
+        }
+
+        .accent-link {
+            color: #9b7b45;
+            font-weight: 450;
+            text-decoration: none;
+            border-bottom: 1px solid #dac29a;
+            transition: all 0.15s;
+        }
+
+        .accent-link:hover {
+            color: #7a5f32;
+            border-bottom-color: #7a5f32;
+        }
+
+        .faq-mini {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1.6rem 1.8rem 1.8rem;
+            border: 1px solid #e3dcd0;
+            margin-bottom: 2.2rem;
+        }
+
+        .faq-mini h4 {
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            color: #353029;
+            font-size: 1rem;
+        }
+
+        .faq-mini details {
+            margin-top: 0.5rem;
+            border-bottom: 1px solid #ece5db;
+            padding: 0.5rem 0;
+        }
+
+        .faq-mini details:last-of-type {
+            border-bottom: none;
+        }
+
+        .faq-mini summary {
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #3f3a31;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-mini summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-mini summary::before {
+            content: "▸";
+            color: #b89f73;
+            margin-right: 0.5rem;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .faq-mini details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .faq-mini .answer {
+            padding: 0.6rem 0 0.2rem 1.3rem;
+            font-size: 0.85rem;
+            color: #4d483e;
+        }
+
+        .footer-note {
+            border-top: 1px solid #ddd6cb;
+            padding-top: 2rem;
+            text-align: center;
+            color: #7c7260;
+            font-size: 0.82rem;
+        }
+
+        .footer-note a {
+            color: #7c7260;
+            border-bottom: 1px dotted #c7bcab;
+            text-decoration: none;
+        }
+
+        .footer-note a:hover {
+            color: #4f4539;
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .hero {
+                padding: 2.8rem 1rem 2.4rem;
+            }
+            .container {
+                padding: 1.8rem 1rem 3rem;
+            }
+            .grid-cards {
+                grid-template-columns: 1fr;
+            }
+            .split-panel {
+                flex-direction: column;
+            }
+            .related-box {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+            }
+            .faq-mini {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>斗牛游戏 · 知识库</h1>
+        <p class="sub">再次访问、收藏与持续关注的索引页。<br>目录式入口，帮助熟悉与回顾。</p>
+        <span class="badge">✦ 最近更新 · 2025</span>
+    </header>
+
+    <main class="container">
+
+        <!-- 卡片区域：目录感 -->
+        <div class="grid-cards">
+            <div class="card">
+                <h3>规则概览</h3>
+                <p>牌型组合、大小比较、特殊牌局 —— 基础判断逻辑一页囊括。</p>
+                <span class="meta">核心机制</span>
+            </div>
+            <div class="card">
+                <h3>术语与变体</h3>
+                <p>各地叫法、下注习惯、局内用语。不同房间略有差别，可对照了解。</p>
+                <span class="meta">延伸阅读</span>
+            </div>
+            <div class="card">
+                <h3>常见策略笔记</h3>
+                <p>位置选择、止损思路、牌力预估。非教学，仅为经验整理。</p>
+                <span class="meta">参考收藏</span>
+            </div>
+            <div class="card">
+                <h3>访问入口</h3>
+                <p>回到主站，浏览最新动态或继续之前的内容。可收藏此页作为起点。</p>
+                <span class="meta">链接</span>
+            </div>
+        </div>
+
+        <!-- 说明区 + 提示区 -->
+        <div class="split-panel">
+            <div class="panel-item">
+                <span class="icon-tag">📄 说明</span>
+                <h4>关于本页</h4>
+                <p>这是一个轻量知识索引，不是完整手册。主要面向希望快速定位信息、减少重复查找的用户。页面不会频繁变动，但会跟随主站调整做适度更新。你可以把它视为一块常用的信息面板。</p>
+            </div>
+            <div class="panel-item">
+                <span class="icon-tag">💡 提示</span>
+                <h4>收藏与回访</h4>
+                <p>如果你曾浏览过 <a href="https://m-bullfighting.com" class="inline-link">斗牛游戏</a> 相关内容，建议将此页加入书签。后续再回来时，可以通过这里的目录直接跳转到你关心的部分，不必每次从头翻阅。</p>
+            </div>
+        </div>
+
+        <!-- 相关信息区 -->
+        <div class="related-box">
+            <div class="info-cluster">
+                <span><strong>牌型</strong> 牛牛 · 牛九 · 无牛</span>
+                <span><strong>人数</strong> 2–6 人</span>
+                <span><strong>模式</strong> 经典 · 抢庄 · 轮庄</span>
+                <span><strong>平台</strong> 移动端适配</span>
+            </div>
+            <div class="label">相关信息</div>
+        </div>
+
+        <!-- FAQ 摘要 -->
+        <div class="faq-mini">
+            <h4>常见疑问 · 摘要</h4>
+            <details>
+                <summary>在哪里可以找到完整的牌型举例？</summary>
+                <div class="answer">主站 <a href="https://m-bullfighting.com" class="accent-link">斗牛游戏</a> 的说明区有图文对照表，也包含部分特殊牌型说明。本页仅做概览。</div>
+            </details>
+            <details>
+                <summary>页面内容多久更新一次？</summary>
+                <div class="answer">没有固定周期。当主站规则说明或功能模块有明显调整时，这里的索引描述会同步修正。建议每两三个月回看一次。</div>
+            </details>
+            <details>
+                <summary>是否有针对新手的指引？</summary>
+                <div class="answer">本页不直接提供教学，但主站的新手区域有分步说明。你可以通过站内导航找到。如果想先了解基本概念，本页的卡片和术语也可能提供一些线索。</div>
+            </details>
+        </div>
+
+        <!-- 脚注：再次访问提示 -->
+        <div class="footer-note">
+            <p>再次访问 · 收藏 · 持续关注 &nbsp;—&nbsp; <a href="https://m-bullfighting.com">斗牛游戏</a></p>
+            <p style="margin-top:0.5rem; font-size:0.75rem; color:#9b9284;">知识库入口 · 信息索引 · 非官方说明</p>
+        </div>
+
+    </main>
+
+</body>
+</html>
