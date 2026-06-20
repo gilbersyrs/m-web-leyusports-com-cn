@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>ued体育 · 简明运动指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #f5f8f9;
+            color: #1e2d2f;
+            line-height: 1.6;
+            padding: 0 16px;
+        }
+
+        .wrap {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 32px 0 48px;
+        }
+
+        /* hero 横幅 —— 杂志感 */
+        .hero {
+            background: linear-gradient(145deg, #1d494e 0%, #2f6b6f 100%);
+            border-radius: 28px;
+            padding: 36px 28px 40px;
+            color: #f0fafb;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 20px rgba(25, 70, 70, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 240px;
+            height: 240px;
+            background: rgba(190, 230, 225, 0.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            max-width: 80%;
+        }
+
+        .hero .sub {
+            font-size: 1rem;
+            opacity: 0.8;
+            border-left: 4px solid #8fcbc5;
+            padding-left: 16px;
+            max-width: 72%;
+            margin-bottom: 18px;
+        }
+
+        .hero .meta-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(2px);
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            letter-spacing: 0.4px;
+            color: #d4f0ec;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* 背景说明卡片 (网格卡片) */
+        .bg-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 28px 24px;
+            margin-bottom: 28px;
+            box-shadow: 0 4px 12px rgba(0, 30, 30, 0.04);
+            border: 1px solid #e2edeb;
+        }
+
+        .bg-card .card-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #3c7a7a;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .bg-card .card-label span {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #2b7a7a;
+        }
+
+        .bg-card p {
+            font-size: 0.95rem;
+            color: #1f383a;
+            max-width: 680px;
+        }
+
+        .bg-card p + p {
+            margin-top: 16px;
+        }
+
+        /* 三段自然介绍 —— 网格卡片 */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 28px 0 24px;
+        }
+
+        @media (min-width: 540px) {
+            .grid-cards {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+        }
+
+        .card-item {
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 24px 18px 22px;
+            border: 1px solid #daeae7;
+            transition: all 0.2s ease;
+            box-shadow: 0 3px 8px rgba(0, 40, 40, 0.02);
+        }
+
+        .card-item:hover {
+            border-color: #70b5ad;
+            box-shadow: 0 8px 20px rgba(30, 100, 95, 0.06);
+        }
+
+        .card-item h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1b4749;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-item h3 i {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #358a86;
+            border-radius: 2px;
+            transform: rotate(45deg);
+            opacity: 0.7;
+        }
+
+        .card-item p {
+            font-size: 0.9rem;
+            color: #2e4f4f;
+            line-height: 1.6;
+        }
+
+        /* FAQ 摘要 (简洁) */
+        .faq-mini {
+            background: #eef6f4;
+            border-radius: 24px;
+            padding: 26px 24px;
+            margin: 20px 0 32px;
+            border-left: 5px solid #54a09a;
+        }
+
+        .faq-mini h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #155a5a;
+            margin-bottom: 14px;
+            letter-spacing: 0.3px;
+        }
+
+        .faq-mini details {
+            margin-bottom: 14px;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            color: #1c4e4e;
+            cursor: pointer;
+            padding: 6px 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .faq-mini summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-mini summary::before {
+            content: '▸';
+            color: #3c8f89;
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+
+        .faq-mini details[open] summary::before {
+            content: '▾';
+        }
+
+        .faq-mini .answer {
+            padding: 6px 0 4px 24px;
+            font-size: 0.9rem;
+            color: #2b5c5a;
+            border-left: 2px dashed #9ccbc5;
+            margin-left: 6px;
+        }
+
+        /* 页尾访问提醒 */
+        .footer-note {
+            background: #ffffff;
+            border-radius: 30px;
+            padding: 24px 20px;
+            border: 1px solid #cde0dc;
+            text-align: center;
+            margin-top: 16px;
+            box-shadow: 0 2px 6px rgba(20, 70, 60, 0.02);
+        }
+
+        .footer-note p {
+            font-size: 0.95rem;
+            color: #1e3d3d;
+            max-width: 600px;
+            margin: 0 auto 6px;
+        }
+
+        .footer-note .highlight-link {
+            font-weight: 600;
+            color: #1d6d68;
+            text-decoration: none;
+            border-bottom: 2px solid #7ebbb4;
+            padding-bottom: 2px;
+            transition: 0.2s;
+        }
+
+        .footer-note .highlight-link:hover {
+            color: #0b4a47;
+            border-bottom-color: #0f5f59;
+        }
+
+        .footer-note .small-meta {
+            display: block;
+            margin-top: 14px;
+            font-size: 0.75rem;
+            color: #6a9490;
+            letter-spacing: 0.6px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #d5e6e2;
+            margin: 28px 0 10px;
+        }
+
+        /* 移动端微调 */
+        @media (max-width: 380px) {
+            .hero h1 {
+                font-size: 1.7rem;
+                max-width: 100%;
+            }
+            .hero .sub {
+                max-width: 100%;
+            }
+            .card-item {
+                padding: 18px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+
+    <!-- hero 横幅 -->
+    <div class="hero">
+        <h1>ued体育<br>简明运动指南</h1>
+        <div class="sub">赛事视野 · 实用资讯 · 日常提醒</div>
+        <div class="meta-tag">⏺ 专题 · 2025</div>
+    </div>
+
+    <!-- 背景说明卡片 -->
+    <div class="bg-card">
+        <div class="card-label"><span></span> 背景</div>
+        <p>运动数据的获取与整理，正成为越来越多参与者的日常需求。无论是赛前准备、赛中追踪还是赛后复盘，一个清晰的信息起点能显著降低筛选成本。<strong>ued体育</strong> 围绕主流赛事与运动场景，聚合经过核验的基础数据与动态参考，帮助用户快速建立自己的信息框架。</p>
+        <p>本专题从常用功能与使用习惯出发，提供一份轻量级但覆盖关键环节的入门视角。内容保持中性，不过度延伸，适合刚接触运动资讯整理的用户参考。</p>
+    </div>
+
+    <!-- 三段自然介绍 (网格卡片) -->
+    <div class="grid-cards">
+        <div class="card-item">
+            <h3><i></i> 赛事结构速览</h3>
+            <p>从联赛日历到杯赛阶段，<strong>ued体育</strong> 将赛程按周、月、赛季分级呈现。用户可快速定位焦点战、转会窗口及休赛期节点，无需在多个页面间跳转核对。每项赛事附注规则摘要与积分逻辑，适合快速查阅。</p>
+        </div>
+        <div class="card-item">
+            <h3><i></i> 数据维度与筛选</h3>
+            <p>覆盖球队、球员、裁判、场馆等基础元数据，支持按联赛、赛季、场地类型进行交叉筛选。图表以简洁的卡片与列表为主，降低认知负荷。自定义关注列表功能可保存常用组合，便于重复调用。</p>
+        </div>
+        <div class="card-item">
+            <h3><i></i> 访问与场景适配</h3>
+            <p>移动优先的布局确保在手机与平板上获得一致体验。关键数据区域采用高对比度配色（蓝绿辅助色），弱光环境下仍可辨识。页面加载经过优化，无额外广告干扰，适合在赛间或通勤时快速浏览。</p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 (杂志式紧凑) -->
+    <div class="faq-mini">
+        <h4>📋 常见要点 (FAQ 摘要)</h4>
+        <details>
+            <summary>如何高效使用赛事日历？</summary>
+            <div class="answer">建议先筛选感兴趣的大洲与联赛，再启用「仅显示焦点战」标签。日历支持按周视图与月视图切换，周末赛事会自动高亮。可长按某场比赛收藏至个人时间线。</div>
+        </details>
+        <details>
+            <summary>数据更新频率与来源？</summary>
+            <div class="answer">基础数据（赛程、比分、积分）每 15 分钟同步一次，球员统计与转会信息每日更新。来源为公开赛事统计机构与联盟官方数据，平台做二次加工与结构优化。</div>
+        </details>
+        <details>
+            <summary>移动端是否支持离线查看？</summary>
+            <div class="answer">部分已加载的赛程卡片与球队简介支持离线缓存（约 72 小时）。深度统计页面需联网获取。可在设置中调整缓存范围与清理周期。</div>
+        </details>
+    </div>
+
+    <!-- 页尾访问提示 -->
+    <div class="footer-note">
+        <p>如果你正在寻找一个结构清晰、信息密度适中的运动数据起点，可以了解 <a href="https://m--uedsports.com" class="highlight-link">ued体育</a> 所提供的赛事索引与参考框架。</p>
+        <p style="margin-top: 8px; font-size: 0.9rem;">页面内容保持克制陈述，不构成任何投资或参与建议。所有数据仅供参考，请以官方发布为准。</p>
+        <span class="small-meta">杂志专题 · 简洁信息流 · 移动优先</span>
+    </div>
+
+    <hr>
+    <div style="text-align: center; font-size: 0.75rem; color: #779c98; letter-spacing: 0.5px; padding: 12px 0 4px;">
+        ⚡ 页面设计 · 蓝绿网格 · 2025
+    </div>
+</div>
+</body>
+</html>
